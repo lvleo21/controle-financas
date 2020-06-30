@@ -19,17 +19,13 @@ class TrasactionListView(LoginRequiredMixin, ListView):
         search = self.request.GET.get("id_search", None)
         qs = qs.filter(client__user = self.request.user)
         
-        
         if search is not None:
             print("entrou")
             qs = qs.filter(title = search)
         
-
         return qs 
 
       
- 
-
 class TransactionCreateView(LoginRequiredMixin, CreateView):
     model = Transaction
     form_class = TransactionForm
@@ -43,9 +39,7 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
         self.object.client = temp_client
         self.object.save()
 
-
         return super().form_valid(form)
-
 
 
 class TransactionUpdateView(LoginRequiredMixin, UpdateView):
@@ -60,19 +54,7 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('core:list_transaction')
 
 
-class ClientCreateView(CreateView):
-    model = Client
-    form_class = UserClientForm
-    template_name = "core/create_client.html"
-    success_url = reverse_lazy('login')
 
-    def form_valid(self, form):
-        user = form['user'].save()
-
-        client = form['client'].save(commit=False)
-        client.user = user
-        client.save()
-        return super().form_valid(form)
 
     
 
