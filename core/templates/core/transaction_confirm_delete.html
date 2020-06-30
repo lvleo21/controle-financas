@@ -1,0 +1,24 @@
+{% extends 'core/components/base.html' %}
+
+
+{% block title %}
+Confimar Exclusão
+{% endblock title %}
+
+{% block content %}
+
+<h1>DESEJA REALMENTE EXCLUIR A TRANSAÇÃO ?</h1>
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Excluir</button>
+    <br>
+    <a href="{% url 'core:list_transaction' %}">Voltar</a>
+</form>
+
+
+
+
+{% endblock content %}

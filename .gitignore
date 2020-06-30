@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+venv
+db.sqlite3
+migrate.sh
+mm.sh
+run.sh
+venv.sh

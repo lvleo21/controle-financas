@@ -1,0 +1,22 @@
+{% extends 'core/components/base.html' %}
+
+
+{% block title %}
+CRIAR CLIENTE
+{% endblock title %}
+
+{% block content %}
+
+<h1>CRIAR USUÁRIO</h1>
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Cadastrar</button>
+</form>
+
+<br>
+<a href="{% url 'login' %}">Voltar</a>
+
+{% endblock content %}

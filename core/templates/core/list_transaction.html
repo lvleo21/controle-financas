@@ -1,0 +1,59 @@
+{% extends 'core/components/base.html' %}
+
+
+{% block title %}
+Lista de Transações
+{% endblock title %}
+
+{% block css %}
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<h1>LISTA DE TRANSAÇÕES - {{request.user.username|upper}}</h1>
+
+<form method="GET">
+    {% csrf_token %}
+    <input type="text" placeholder="Buscar por título ..." name = "id_search" type="search"> <button>Buscar</button>
+</form>
+<a href="{% url 'core:list_transaction' %}">Limpar</a>
+<br>
+<br>
+<table style="width:100%">
+    <tr>
+        <th>Título</th>
+        <th>Valor(R$)</th>
+        <th>Categoria</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+        <td>
+            <a href="{% url 'core:update_transaction' transaction.pk %}">
+                {{transaction.title}}
+            </a>
+        </td>
+
+        <td> {{transaction.value}}</td>
+        <td>{{transaction.category}}</td>
+    </tr>
+
+    {% endfor %}
+
+
+</table>
+
+<br>
+<a href="{% url 'core:create_transaction' %}">Adicionar Transação</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+{% endblock content %}
