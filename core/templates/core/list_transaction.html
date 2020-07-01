@@ -8,9 +8,10 @@ Lista de Transações
 {% block css %}
 
 <style>
-    #title_label{
+    #title_label {
         transition: background-color .9s;
     }
+
     #title_label:hover {
         background-color: rgb(228, 226, 226);
     }
@@ -26,7 +27,7 @@ Lista de Transações
 
     <!-- Default dropleft button -->
     <div class="btn-group dropleft">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             Menu
         </button>
@@ -59,7 +60,7 @@ Lista de Transações
                     <div class="row">
                         <div class="col-md-8" style="padding: 0px;">
 
-                            
+
 
                             <input class="form-control" type="text" placeholder="Buscar por título ..." name="id_search"
                                 type="search">
@@ -110,6 +111,33 @@ Lista de Transações
 
 </div>
 
+<br>
+<div class="d-flex justify-content-center">
+    <ul class="pagination">
+        <li class="page-item  {% if page_obj.has_previous == False %} disabled {% endif %}"> 
+            <a class="page-link" 
+            href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}">
+            <i class="fas fa-arrow-left"></i>
+            </a>
+        </li>
 
+        {% with ''|center:page_obj.paginator.num_pages as range %}
+            {% for _ in range %}
+                <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}">
+                    <a class="page-link" href="?page={{ forloop.counter}}">
+                        {{ forloop.counter}}
+                    </a>
+                </li>
+            {% endfor %}
+        {% endwith %}
+        
+        <li class="page-item  {% if page_obj.has_next == False %} disabled {% endif %}"> 
+            <a class="page-link" 
+            href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}">
+            <i class="fas fa-arrow-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>
 
 {% endblock content %}

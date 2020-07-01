@@ -11,7 +11,7 @@ class TrasactionListView(LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "core/list_transaction.html"
     context_object_name = "transactions"
-    
+    paginate_by = 5
 
     def get_queryset(self, *args, **kwargs):
         qs = super(TrasactionListView, self).get_queryset(*args, **kwargs) 
