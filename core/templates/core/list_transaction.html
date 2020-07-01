@@ -1,5 +1,5 @@
 {% extends 'core/components/base.html' %}
-
+{% load widget_tweaks %}
 
 {% block title %}
 Lista de Transações
@@ -58,11 +58,14 @@ Lista de Transações
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-8" style="padding: 0px;">
+
+                            
+
                             <input class="form-control" type="text" placeholder="Buscar por título ..." name="id_search"
                                 type="search">
                         </div>
                         <div class="col-md-3" style="padding: 0px;">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-success">
                                 <i class="fas fa-search-dollar"></i>
                             </button>
                         </div>

@@ -1,22 +1,56 @@
 {% extends 'core/components/base.html' %}
-
+{% load widget_tweaks %}
 
 {% block title %}
-CRIAR CLIENTE
+CADASTRO DO CLIENTE
 {% endblock title %}
 
 {% block content %}
 
-<h1>CRIAR USUÁRIO</h1>
+
+<div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
+
+    <div style="border: 1px solid black; padding: 20px; border-radius: 10px;">
+        <h3>FORMULÁRIO DE CADASTRO DO USUÁRIO</h3>
+
+        <hr>
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+    
+
+            <label>Nome</label>
+            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Digite seu nome completo"></i><br>
+            {% render_field form.client.name class+="form-control" placeholder="Digite seu nome ..." %}
+
+            <label>Idade</label>
+            {% render_field form.client.age class+="form-control" placeholder="Ex.: 21" %}
+            
+            {{ form.user.username.label}}
+            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ form.user.username.help_text}}"></i><br>
+            {% render_field form.user.username class+="form-control" placeholder="Digite seu login ..." %}
+
+            {{ form.user.password1.label}}
+            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ form.user.password1.help_text}}"></i><br>
+            {% render_field form.user.password1 class+="form-control" placeholder="Digite sua senha ..." %}
+
+            {{ form.user.password2.label}}
+            <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{ form.user.password2.help_text}}"></i><br>
+            {% render_field form.user.password2 class+="form-control" placeholder="Digite novamente sua senha ..." %}
+
+            <br>
+
+            <button class="btn btn-primary btn-block"type="submit">CADASTRAR</button>
+
+            <a class = "btn btn-outline-dark btn-block" href="{% url 'login' %}">Voltar</a>
+        </form>
+        
+        
+    </div>
+    
+
+</div>
 
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Cadastrar</button>
-</form>
-
-<br>
-<a href="{% url 'login' %}">Voltar</a>
 
 {% endblock content %}

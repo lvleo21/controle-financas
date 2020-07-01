@@ -1,4 +1,5 @@
 {% extends 'core/components/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
 LOGIN
@@ -7,25 +8,47 @@ LOGIN
 {% block content %}
 
 
+
 <div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
 
-<div class="d-flex justify-content-center">
 
-    <div class="shadow p-3 mb-5 bg-white rounded"
-        style="background-color: white;border: 1px solid rgb(0, 0, 0); padding: 1vw; border-radius: 10px;">
-        <div class="d-flex justify-content-center">
-            <h6>OLÁ, SEJA BEM-VINDO !</h6>
+
+    <div class="">
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <b>Usuário</b> ou <b>Senha</b> inválido, tente novamente.
         </div>
-        <hr>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
+        {% endif %}
 
-            <button class="btn btn-primary btn-block" type="submit">LOGIN</button>
-            <a class="btn btn-secondary btn-block" href="{% url 'accounts:create_client' %}">Cadastrar Usuário</a>
-        </form>
+        <div class="shadow p-3 mb-5 bg-white rounded"
+            style="background-color: white;border: 1px solid rgb(0, 0, 0); padding: 20px; border-radius: 10px;">
+            <div class="d-flex justify-content-center">
+                <h6>OLÁ, SEJA BEM-VINDO !</h6>
+            </div>
+            <hr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.username.label}}
+                {% render_field form.username class+="form-control" placeholder="Digite seu login ..." %}
+                {{form.password.label}}
+                {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." %}
+                <br>
+                <button class="btn btn-primary btn-block" type="submit">LOGIN</button>
+                <a class="btn btn-secondary btn-block" href="{% url 'accounts:create_client' %}">Cadastrar Usuário</a>
+            </form>
+        </div>
     </div>
-</div>
+
+    <div>
+
+    </div>
+
+
+
+
+
+
+
 
 </div>
 
