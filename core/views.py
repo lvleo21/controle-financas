@@ -14,14 +14,13 @@ class TrasactionListView(LoginRequiredMixin, ListView):
     
 
     def get_queryset(self, *args, **kwargs):
-
         qs = super(TrasactionListView, self).get_queryset(*args, **kwargs) 
         search = self.request.GET.get("id_search", None)
         qs = qs.filter(client__user = self.request.user)
         
         if search is not None:
             print("entrou")
-            qs = qs.filter(title = search)
+            qs = qs.filter(title__icontains = search)
         
         return qs 
 
