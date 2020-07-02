@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 {% block title %}
-LOGIN
+Control Transaction
 {% endblock title %}
 
 {% block content %}
@@ -16,12 +16,12 @@ LOGIN
     <div class="">
         {% if form.non_field_errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <b>Usuário</b> ou <b>Senha</b> inválido, tente novamente.
+            <b>USUÁRIO</b> ou <b>SENHA</b> inválido, tente novamente.
         </div>
         {% endif %}
 
-        <div class="shadow p-3 mb-5 bg-white rounded"
-            style="background-color: white;border: 1px solid rgb(0, 0, 0); padding: 20px; border-radius: 10px;">
+        <div class=""
+            style="background-color: white; padding: 20px; border-radius: 20px;">
             <div class="d-flex justify-content-center">
                 <h6>OLÁ, SEJA BEM-VINDO !</h6>
             </div>
@@ -29,12 +29,13 @@ LOGIN
             <form action="" method="POST">
                 {% csrf_token %}
                 {{form.username.label}}
-                {% render_field form.username class+="form-control" placeholder="Digite seu login ..." %}
+                {% render_field form.username class+="form-control" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
+                
                 {{form.password.label}}
-                {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." %}
+                {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
                 <br>
-                <button class="btn btn-primary btn-block" type="submit">LOGIN</button>
-                <a class="btn btn-secondary btn-block" href="{% url 'accounts:create_client' %}">Cadastrar Usuário</a>
+                <button class="btn btn btn-block" style="background-color: rgb(133, 88, 165); color: white;" type="submit">LOGIN</button>
+                <a class="btn btn-outline-secondary btn-block" href="{% url 'accounts:create_client' %}">SIGN UP</a>
             </form>
         </div>
     </div>

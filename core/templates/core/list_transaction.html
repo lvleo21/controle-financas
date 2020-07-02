@@ -14,6 +14,7 @@ Lista de Transações
 
     #title_label:hover {
         background-color: rgb(228, 226, 226);
+        
     }
 </style>
 
@@ -66,7 +67,7 @@ Lista de Transações
                                 type="search">
                         </div>
                         <div class="col-md-3" style="padding: 0px;">
-                            <button class="btn btn-success">
+                            <button class="btn btn-light" style="background-color: rgb(133, 88, 165); color: white;">
                                 <i class="fas fa-search-dollar"></i>
                             </button>
                         </div>
@@ -80,10 +81,10 @@ Lista de Transações
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Título</th>
-                        <th scope="col">Valor(R$)</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Remover</th>
+                        <th class="text-center" scope="col">Título</th>
+                        <th class="text-center" scope="col">Valor(R$)</th>
+                        <th class="text-center" scope="col">Categoria</th>
+                        <th class="text-center" scope="col">Remover</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,7 +99,7 @@ Lista de Transações
 
                         <td class="text-center"> {{transaction.value}}</td>
                         <td class="text-center">{{transaction.category}}</td>
-                        <td><a class="btn btn-danger btn-block"
+                        <td class="text-center"><a class="btn btn-danger btn-lg" style=""
                                 href="{% url 'core:delete_transaction' transaction.pk %}">
                                 <i class="fas fa-trash-alt"></i></a></td>
                     </tr>
@@ -113,31 +114,34 @@ Lista de Transações
 
 <br>
 <div class="d-flex justify-content-center">
-    <ul class="pagination">
-        <li class="page-item  {% if page_obj.has_previous == False %} disabled {% endif %}"> 
-            <a class="page-link" 
-            href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}">
-            <i class="fas fa-arrow-left"></i>
-            </a>
-        </li>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination rounded">
+            <li class="page-item  {% if page_obj.has_previous == False %} disabled {% endif %}">
+                <a class="page-link"  style=""
+                    href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </li>
 
-        {% with ''|center:page_obj.paginator.num_pages as range %}
+            {% with ''|center:page_obj.paginator.num_pages as range %}
             {% for _ in range %}
-                <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}">
-                    <a class="page-link" href="?page={{ forloop.counter}}">
-                        {{ forloop.counter}}
-                    </a>
-                </li>
+            <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}">
+                <a class="page-link" href="?page={{ forloop.counter}}">
+                    {{ forloop.counter}}
+                </a>
+            </li>
             {% endfor %}
-        {% endwith %}
-        
-        <li class="page-item  {% if page_obj.has_next == False %} disabled {% endif %}"> 
-            <a class="page-link" 
-            href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}">
-            <i class="fas fa-arrow-right"></i>
-            </a>
-        </li>
-    </ul>
+            {% endwith %}
+
+            <li class="page-item  {% if page_obj.has_next == False %} disabled {% endif %}">
+                <a class="page-link"
+                    href="{% if page_obj.has_next %} ?page={{ page_obj.next_page_number }} {% else %} # {% endif %}">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 {% endblock content %}
