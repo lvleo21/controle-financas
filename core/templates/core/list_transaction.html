@@ -125,8 +125,8 @@ Lista de Transações
 
             {% with ''|center:page_obj.paginator.num_pages as range %}
             {% for _ in range %}
-            <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}">
-                <a class="page-link" href="?page={{ forloop.counter}}">
+            <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}" >
+                <a class="page-link" href="?page={{ forloop.counter}}" style="color: rgb(0, 0, 0);">
                     {{ forloop.counter}}
                 </a>
             </li>

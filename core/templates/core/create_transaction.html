@@ -1,5 +1,6 @@
 {% extends 'core/components/base.html' %}
-
+{% load static %}
+{% load widget_tweaks %}
 
 {% block title %}
 Criar de Transação
@@ -7,16 +8,63 @@ Criar de Transação
 
 {% block content %}
 
-<h1>CRIAR TRANSAÇÃO</h1>
 
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Cadastrar</button>
-</form>
+<div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-center">
+                <h3>Adicionar Transação</h3>
+            </div>
+        </div>
 
-<br>
-<a href="{% url 'core:list_transaction' %}">Voltar</a>
+        <div class="card-body">
+            <form action="" method="POST">
+                
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col">
+                        <label><b>Título</b></label>
+                        {% render_field form.title class+="form-control" %}
+                    </div>
+                    <div class="col-md-3">
+                        <label><b>Valor (R$)</b></label>
+                        {% render_field form.value class+="form-control" %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label><b>Categoria</b></label>
+                        {% render_field form.category class+="form-control" %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label><b>Descrição</b></label>
+                        {% render_field form.description class+="form-control" %}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-outline-secondary btn-block" href="{% url 'core:list_transaction' %}">VOLTAR</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary btn-block" 
+                                type="submit">REGISTAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 
 {% endblock content %}

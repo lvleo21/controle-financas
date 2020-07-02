@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from core.forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+ 
 
 class TrasactionListView(LoginRequiredMixin, ListView):
     model = Transaction
@@ -19,8 +19,9 @@ class TrasactionListView(LoginRequiredMixin, ListView):
         qs = qs.filter(client__user = self.request.user)
         
         if search is not None:
-            print("entrou")
             qs = qs.filter(title__icontains = search)
+        
+
         
         return qs 
 
