@@ -14,38 +14,44 @@ Lista de Transações
 
     #title_label:hover {
         background-color: rgb(228, 226, 226);
-        
+
+    }
+
+    .square {
+        height: 10vh;
+        width: 20vw;
+       
+
+
     }
 </style>
 
 {% endblock css %}
 
 {% block content %}
+<br>
+<div class="d-flex justify-content-center">
 
-<div class="d-flex justify-content-end">
-
-
-
-    <!-- Default dropleft button -->
-    <div class="btn-group dropleft">
-        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Menu
+    <div class="square d-flex align-items-center d-flex justify-content-around shadow-sm p-3 mb-5 bg-white rounded">
+        <button type="button" class="btn btn-dark" disabled>
+            <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}} 
         </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item disabled" href="#" style="align-items: center; text-align: center;">
 
-                {{request.user.username|upper}}
-            </a>
-            <hr>
-            <a class="dropdown-item" href="{% url 'core:create_transaction' %}">Adicionar Transação</a>
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-        </div>
+        <a class="btn btn-primary" style="color: white;"  href="{% url 'core:create_transaction' %}" title="Adicionar Transação">
+            <i class="fas fa-plus"></i>
+        </a>
+
+        <a class="btn btn-danger" href="{% url 'logout' %}" title="Sair">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+
     </div>
+
+   
 </div>
 
 
-
+<br>
 
 
 <div class="container">
@@ -67,7 +73,7 @@ Lista de Transações
                                 type="search">
                         </div>
                         <div class="col-md-3" style="padding: 0px;">
-                            <button class="btn btn-light" style="background-color: rgb(133, 88, 165); color: white;">
+                            <button class="btn btn-primary">
                                 <i class="fas fa-search-dollar"></i>
                             </button>
                         </div>
@@ -77,13 +83,15 @@ Lista de Transações
                 <!-- <a href="{% url 'core:list_transaction' %}">Limpar</a> -->
             </div>
         </div>
-        <div class="card-body" style="padding: 0px;">
+        <div class="card-body" style="padding: 10px;">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">Título</th>
                         <th class="text-center" scope="col">Valor(R$)</th>
                         <th class="text-center" scope="col">Categoria</th>
+                        <th class="text-center" scope="col">Adicionado</th>
+                        <th class="text-center" scope="col">Modificado</th>
                         <th class="text-center" scope="col">Remover</th>
                     </tr>
                 </thead>
@@ -99,6 +107,8 @@ Lista de Transações
 
                         <td class="text-center"> {{transaction.value}}</td>
                         <td class="text-center">{{transaction.category}}</td>
+                        <td class="text-center">{{transaction.date_trasaction}}</td>
+                        <td class="text-center">{{transaction.date_now}}</td>
                         <td class="text-center"><a class="btn btn-danger btn-lg" style=""
                                 href="{% url 'core:delete_transaction' transaction.pk %}">
                                 <i class="fas fa-trash-alt"></i></a></td>
@@ -117,7 +127,7 @@ Lista de Transações
     <nav aria-label="Page navigation example">
         <ul class="pagination rounded">
             <li class="page-item  {% if page_obj.has_previous == False %} disabled {% endif %}">
-                <a class="page-link"  style=""
+                <a class="page-link" style=""
                     href="{% if page_obj.has_previous %} ?page={{ page_obj.previous_page_number }} {% else %} # {% endif %}">
                     <i class="fas fa-arrow-left"></i>
                 </a>
@@ -125,7 +135,7 @@ Lista de Transações
 
             {% with ''|center:page_obj.paginator.num_pages as range %}
             {% for _ in range %}
-            <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}" >
+            <li class="page-item {% if forloop.counter == page_obj.number %} active {% endif %}">
                 <a class="page-link" href="?page={{ forloop.counter}}" style="color: rgb(0, 0, 0);">
                     {{ forloop.counter}}
                 </a>

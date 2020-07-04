@@ -5,23 +5,27 @@
 Control Transaction
 {% endblock title %}
 
+{% block css %}
+
+{% endblock css %}
+
+
+
+
 {% block content %}
-
-
 
 <div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
 
 
 
-    <div class="">
+    <div class="shadow p-3 mb-5 bg-white rounded">
         {% if form.non_field_errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <b>USUÁRIO</b> ou <b>SENHA</b> inválido, tente novamente.
         </div>
         {% endif %}
 
-        <div class=""
-            style="background-color: white; padding: 20px; border-radius: 20px;">
+        <div class="" style="background-color: white; padding: 20px; border-radius: 20px;">
             <div class="d-flex justify-content-center">
                 <h6>OLÁ, SEJA BEM-VINDO !</h6>
             </div>
@@ -29,13 +33,18 @@ Control Transaction
             <form action="" method="POST">
                 {% csrf_token %}
                 {{form.username.label}}
-                {% render_field form.username class+="form-control" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
-                
+                {% render_field form.username class+="form-control input-focus" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
+
                 {{form.password.label}}
-                {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
+                {% render_field form.password class+="form-control input-focus" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
                 <br>
-                <button class="btn btn btn-block" style="background-color: rgb(133, 88, 165); color: white;" type="submit">LOGIN</button>
-                <a class="btn btn-outline-secondary btn-block" href="{% url 'accounts:create_client' %}">SIGN UP</a>
+                <button class="btn btn-primary btn-block" 
+                    type="submit">LOGIN</button>
+
+                 
+
+                <a class="btn btn-outline-secondary btn-block" href="{% url 'accounts:create_client' %}" 
+                style="border-radius: 0px;">SIGN UP</a>
             </form>
         </div>
     </div>

@@ -23,6 +23,8 @@ class Transaction(models.Model):
     title = models.CharField(max_length=50, verbose_name="Título") 
     value = models.DecimalField(max_digits=7, decimal_places=2, verbose_name = "Valor")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Categoria")
+    date_now = models.DateTimeField(auto_now_add=True)
+    date_trasaction = models.DateField(verbose_name="Data da Transação")
     description = models.TextField(verbose_name="Descrição", blank=True)
 
     def __str__(self):
