@@ -76,7 +76,6 @@ WSGI_APPLICATION = 'ControleFinancas.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -87,7 +86,6 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -106,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'pt-br'
 
@@ -120,7 +117,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -133,9 +129,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = "media"
 
 
-#
+# Login/Logout
 
-LOGIN_REDIRECT_URL = "core:list_transaction"
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL = "core:list_transaction"
+ 
 
  

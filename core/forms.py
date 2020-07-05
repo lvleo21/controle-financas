@@ -6,6 +6,7 @@ from betterforms.multiform import MultiModelForm
 from six import python_2_unicode_compatible
 
 class TransactionForm(ModelForm):
+
     class Meta:
         model = Transaction
         fields = "__all__"
@@ -17,6 +18,8 @@ class UserForm(UserCreationForm):
         fields = ["username", ]
 
 class ClientForm(ModelForm):
+
+    
     class Meta:
         model = Client
         fields = "__all__"

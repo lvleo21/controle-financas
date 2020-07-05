@@ -20,9 +20,20 @@ Lista de Transações
     .square {
         height: 10vh;
         width: 20vw;
-       
 
+    }
 
+    .teste:hover {
+        background-color: rgb(228, 226, 226);
+    }
+    #delete{
+        color:rgb(221, 90, 90)
+    }
+    #delete:hover{
+        color:red
+    }
+    #edit:hover{
+        color: rgb(97, 128, 231);
     }
 </style>
 
@@ -32,12 +43,13 @@ Lista de Transações
 <br>
 <div class="d-flex justify-content-center">
 
-    <div class="square d-flex align-items-center d-flex justify-content-around shadow-sm p-3 mb-5 bg-white rounded">
-        <button type="button" class="btn btn-dark" disabled>
-            <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}} 
+    <div class="square d-flex align-items-center d-flex justify-content-around shadow-sm p-3 bg-white rounded">
+        <button type="button" class="btn btn-success" disabled>
+            <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}}
         </button>
 
-        <a class="btn btn-primary" style="color: white;"  href="{% url 'core:create_transaction' %}" title="Adicionar Transação">
+        <a class="btn btn-primary" style="color: white;" href="{% url 'core:create_transaction' %}"
+            title="Adicionar Transação">
             <i class="fas fa-plus"></i>
         </a>
 
@@ -47,15 +59,15 @@ Lista de Transações
 
     </div>
 
-   
+
 </div>
+
 
 
 <br>
 
-
 <div class="container">
-    <div class="card shadow-sm rounded">
+    <div class="card shadow-sm mb-5 bg-white rounded">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h3>
@@ -84,7 +96,7 @@ Lista de Transações
             </div>
         </div>
         <div class="card-body" style="padding: 10px;">
-            <table class="table table-bordered">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">Título</th>
@@ -93,27 +105,36 @@ Lista de Transações
                         <th class="text-center" scope="col">Adicionado</th>
                         <th class="text-center" scope="col">Modificado</th>
                         <th class="text-center" scope="col">Remover</th>
+                        <th class="text-center" scope="col">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for transaction in transactions %}
+                    <a href="{% url 'core:update_transaction' transaction.pk %}">
 
-                    <tr>
-                        <td class="text-center" id="title_label">
-                            <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
-                                {{transaction.title}}
-                            </a>
-                        </td>
 
-                        <td class="text-center"> {{transaction.value}}</td>
-                        <td class="text-center">{{transaction.category}}</td>
-                        <td class="text-center">{{transaction.date_trasaction}}</td>
-                        <td class="text-center">{{transaction.date_now}}</td>
-                        <td class="text-center"><a class="btn btn-danger btn-lg" style=""
-                                href="{% url 'core:delete_transaction' transaction.pk %}">
-                                <i class="fas fa-trash-alt"></i></a></td>
-                    </tr>
+                        <tr class="teste">
+                            <td class="text-center" id="title_label">
+                                <b>{{transaction.title}}</b>
+                                
+                            </td>
 
+                            <td class="text-center"> {{transaction.value}}</td>
+                            <td class="text-center">{{transaction.category}}</td>
+                            <td class="text-center">{{transaction.date_trasaction}}</td>
+                            <td class="text-center">{{transaction.date_now}}</td>
+                            <td class="text-center">
+                                <a href="{% url 'core:delete_transaction' transaction.pk %}">
+                                    <i class="fas fa-trash-alt" id = "delete"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
+                                    <i class="fas fa-edit" id = "edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </a>
                     {% endfor %}
                 </tbody>
             </table>

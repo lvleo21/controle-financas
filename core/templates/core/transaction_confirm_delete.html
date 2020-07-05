@@ -1,24 +1,47 @@
 {% extends 'core/components/base.html' %}
 
 
+{% block css %}
+<style>
+    .square {
+        height: 100vh;
+        width: 100vw;
+
+    }
+</style>
+{% endblock css%}
+
 {% block title %}
 Confimar Exclusão
 {% endblock title %}
 
 {% block content %}
-
-<h1>DESEJA REALMENTE EXCLUIR A TRANSAÇÃO ?</h1>
-
-
 <form action="" method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Excluir</button>
-    <br>
-    <a href="{% url 'core:list_transaction' %}">Voltar</a>
+    <div class="square d-flex align-items-center d-flex justify-content-around ">
+        <div class="card shadow-sm  mb-5 bg-white rounded">
+            <div class="card-body">
+
+
+
+                <h5>Deseja realmente excluir esta transação ?</h5>
+
+
+
+            </div>
+
+            <div class="card-footer">
+
+                <button class = "btn btn-danger btn-block" type="submit">Confirmar</button>
+                <a  class = "btn btn-outline-secondary btn-block" href="{% url 'core:list_transaction' %}">Voltar</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </form>
-
-
 
 
 {% endblock content %}
