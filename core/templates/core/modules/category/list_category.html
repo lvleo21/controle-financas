@@ -14,15 +14,16 @@ Categorias
         height: 100vh;
     }
 
-    #edit:hover{
+    #edit:hover {
         color: rgb(97, 128, 231);
     }
 
-    #delete{
-        color:rgb(221, 90, 90)
+    #delete {
+        color: rgb(221, 90, 90)
     }
-    #delete:hover{
-        color:red
+
+    #delete:hover {
+        color: red
     }
 </style>
 
@@ -32,7 +33,7 @@ Categorias
 {% block content %}
 
 <div class="square d-flex align-items-center d-flex justify-content-center">
-    <div> 
+    <div>
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -53,7 +54,7 @@ Categorias
                 </div>
 
             </div>
-            <div class="card-body" >
+            <div class="card-body">
 
 
                 <table class="table table-hover">
@@ -68,12 +69,12 @@ Categorias
                     <tbody>
                         {% for category in categories %}
                         <tr>
-                            <td class="text-center" ><b>{{ category.name|upper }}</b></td>
-                            <td class="text-center"> 
-                                {% if category.is_active %} 
-                                    <span class="badge badge-success">ATIVO</span>
-                                {% else %} 
-                                    <span class="badge badge-danger">INATIVO</span>
+                            <td class="text-center"><b>{{ category.name|upper }}</b></td>
+                            <td class="text-center">
+                                {% if category.is_active %}
+                                <span class="badge badge-success">ATIVO</span>
+                                {% else %}
+                                <span class="badge badge-danger">INATIVO</span>
                                 {% endif %}
                             </td>
                             <td class="text-center">
@@ -83,9 +84,44 @@ Categorias
                             </td>
 
                             <td class="text-center">
-                                <a class="text-dark" href="#">
-                                    <i class="fas fa-trash-alt" id="delete" ></i>
-                                </a>
+
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#modal-{{category.pk}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+
+
+                                <div class="modal fade" id="modal-{{category.pk}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-body">
+                                                <h5>
+                                                    Deseja realmente excluir a categoria <b>{{category.name|upper}}</b>?
+                                                </h5>
+                                            </div>
+                                            <form action="{% url 'core:delete_category' category.pk %}" method="POST">
+                                                <div class="modal-footer">
+                                                    {% csrf_token %}
+
+                                                    <button type="submit"
+                                                        class="btn btn-danger btn-block">CONFIRMAR</button>
+
+
+                                                    <button type="button" class="btn btn-outline-secondary btn-block"
+                                                        data-dismiss="modal">VOLTAR</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- <a class="text-dark" href="#">
+                                    <i class="fas fa-trash-alt" id="delete"></i>
+                                </a> -->
                             </td>
                         </tr>
                         {% endfor %}
@@ -132,6 +168,9 @@ Categorias
 
 
 </div>
+
+
+
 
 
 {% endblock content %}

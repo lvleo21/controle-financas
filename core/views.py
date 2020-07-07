@@ -81,11 +81,14 @@ class CategoryListView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         qs  = super(CategoryListView, self).get_queryset(*args, **kwargs)
         
-        #client = Client.objects.get(user = self.request.user)
         if self.request.user.is_superuser is False:
             qs = qs.filter(client__user = self.request.user)
 
         return qs
+
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Category
+    success_url = reverse_lazy("core:list_category")
 
 # class CategoryCreateView(LoginRequiredMixin, CreateView):
 #     model = Category

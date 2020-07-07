@@ -1,0 +1,39 @@
+#title_label {
+    transition: background-color .9s;
+}
+
+#title_label:hover {
+    background-color: rgb(228, 226, 226);
+
+}
+
+.square {
+    height: 10vh;
+    width: 20vw;
+
+}
+
+.square-menu{
+    height: 10vh;
+    width: 22vw;
+    background-color: red;
+
+}
+
+.teste:hover {
+    background-color: rgb(228, 226, 226);
+}
+#delete{
+    color:rgb(221, 90, 90)
+}
+#delete:hover{
+    color:red
+}
+#edit:hover{
+    color: rgb(97, 128, 231);
+}
+
+.square-not-found{
+    width: 100%;
+    height: 100%;
+}

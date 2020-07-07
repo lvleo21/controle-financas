@@ -1,55 +1,20 @@
 {% extends 'core/components/base.html' %}
 {% load widget_tweaks %}
+{% load static %}
 
 {% block title %}
 Lista de Transações
 {% endblock title %}
 
 {% block css %}
-
-<style>
-    #title_label {
-        transition: background-color .9s;
-    }
-
-    #title_label:hover {
-        background-color: rgb(228, 226, 226);
-
-    }
-
-    .square {
-        height: 10vh;
-        width: 20vw;
-
-    }
-
-    .teste:hover {
-        background-color: rgb(228, 226, 226);
-    }
-    #delete{
-        color:rgb(221, 90, 90)
-    }
-    #delete:hover{
-        color:red
-    }
-    #edit:hover{
-        color: rgb(97, 128, 231);
-    }
-
-    .square-not-found{
-        width: 100%;
-        height: 100%;
-    }
-
-</style>
-
+<link rel="stylesheet" href="{% static 'core/css/list-transaction-style.css' %}">
 {% endblock css %}
 
 {% block content %}
 <br>
 <div class="d-flex justify-content-center">
 
-    <div class="square d-flex align-items-center d-flex justify-content-around shadow-sm p-3 bg-white rounded">
+    <div class="square-menu d-flex align-items-center d-flex justify-content-around shadow-sm p-3 bg-white rounded">
         <button type="button" class="btn btn-success" disabled>
             <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}}
         </button>
@@ -57,6 +22,11 @@ Lista de Transações
         <a class="btn btn-primary" style="color: white;" href="{% url 'core:create_transaction' %}"
             title="Adicionar Transação">
             <i class="fas fa-plus"></i>
+        </a>
+
+        <a class="btn btn-dark" style="color: white;" href="{% url 'core:list_category' %}"
+            title="Lista de Categorias">
+            <i class="fas fa-list"></i>
         </a>
 
         <a class="btn btn-danger" href="{% url 'logout' %}" title="Sair">
