@@ -6,6 +6,8 @@ from core.forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.create_instance import create_transaction
 
+
+#! Transaction
 class TrasactionListView(LoginRequiredMixin, ListView):
     model = Transaction
     template_name = "core/list_transaction.html"
@@ -17,12 +19,12 @@ class TrasactionListView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         qs = super(TrasactionListView, self).get_queryset(*args, **kwargs) 
         search = self.request.GET.get("id_search", None)
-        qs = qs.filter(client__user = self.request.user)
+
+        if self.request.user.is_superuser is False:
+            qs = qs.filter(client__user = self.request.user)
         create_transaction(self.request.user)
         if search is not None:
             qs = qs.filter(title__icontains = search)
-        
-
         
         return qs 
 
@@ -37,7 +39,7 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
         category = Category.objects.all()
 
         if (user.is_superuser is False):
-            category = Category.objects.filter(client__user = user)
+            category = Category.objects.filter(client__user = user, is_active = True)
         
         return category
 
@@ -67,8 +69,29 @@ class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('core:list_transaction')
     
 
+#! Category
 
 
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = "core/modules/category/list_category.html"
+    context_object_name = "categories"
+    paginate_by = 5
+
+    def get_queryset(self, *args, **kwargs):
+        qs  = super(CategoryListView, self).get_queryset(*args, **kwargs)
+        
+        #client = Client.objects.get(user = self.request.user)
+        if self.request.user.is_superuser is False:
+            qs = qs.filter(client__user = self.request.user)
+
+        return qs
+
+# class CategoryCreateView(LoginRequiredMixin, CreateView):
+#     model = Category
+#     form_class = 
+#     template_name = "core/create_category.html"
+#     success_url = reverse_lazy('core:list_category')
 
     
 

@@ -22,8 +22,9 @@ Criar de Transação
             <form action="" method="POST">
                 
                 {% csrf_token %}
+                {{form.as_p}}
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col">
                         <label><b>Título</b></label>
                         {% render_field form.title class+="form-control" %}
@@ -47,7 +48,7 @@ Criar de Transação
                         {% render_field form.description class+="form-control" %}
                     </div>
                 </div>
-                <br>
+                <br> -->
                 <div class="row">
                     <div class="col">
                         <div class="d-flex justify-content-center">
@@ -59,6 +60,8 @@ Criar de Transação
                                 type="submit">REGISTAR</button>
                     </div>
                 </div>
+
+
             </form>
         </div>
     </div>

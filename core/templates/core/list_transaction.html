@@ -35,6 +35,12 @@ Lista de Transações
     #edit:hover{
         color: rgb(97, 128, 231);
     }
+
+    .square-not-found{
+        width: 100%;
+        height: 100%;
+    }
+
 </style>
 
 {% endblock css %}
@@ -96,54 +102,87 @@ Lista de Transações
             </div>
         </div>
         <div class="card-body" style="padding: 10px;">
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col">Título</th>
-                        <th class="text-center" scope="col">Valor(R$)</th>
-                        <th class="text-center" scope="col">Categoria</th>
-                        <th class="text-center" scope="col">Adicionado</th>
-                        <th class="text-center" scope="col">Modificado</th>
-                        <th class="text-center" scope="col">Remover</th>
-                        <th class="text-center" scope="col">Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for transaction in transactions %}
-                    <a href="{% url 'core:update_transaction' transaction.pk %}">
-
-
-                        <tr class="teste">
-                            <td class="text-center" id="title_label">
-                                <b>{{transaction.title}}</b>
-                                
-                            </td>
-
-                            <td class="text-center"> {{transaction.value}}</td>
-                            <td class="text-center">{{transaction.category}}</td>
-                            <td class="text-center">{{transaction.date_trasaction}}</td>
-                            <td class="text-center">{{transaction.date_now}}</td>
-                            <td class="text-center">
-                                <a href="{% url 'core:delete_transaction' transaction.pk %}">
-                                    <i class="fas fa-trash-alt" id = "delete"></i>
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
-                                    <i class="fas fa-edit" id = "edit"></i>
-                                </a>
-                            </td>
+            {% if transactions.count > 0 %}
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Título</th>
+                            <th class="text-center" scope="col">Valor(R$)</th>
+                            <th class="text-center" scope="col">Categoria</th>
+                            <th class="text-center" scope="col">Adicionado</th>
+                            <th class="text-center" scope="col">Modificado</th>
+                            <th class="text-center" scope="col">Remover</th>
+                            <th class="text-center" scope="col">Editar</th>
                         </tr>
-                    </a>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <a href="{% url 'core:update_transaction' transaction.pk %}">
+
+
+                            <tr class="teste">
+                                <td class="text-center" id="title_label">
+                                    <b>{{transaction.title}}</b>
+                                    
+                                </td>
+
+                                <td class="text-center"> {{transaction.value}}</td>
+                                <td class="text-center">{{transaction.category}}</td>
+                                <td class="text-center">{{transaction.date_trasaction}}</td>
+                                <td class="text-center">{{transaction.date_now}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'core:delete_transaction' transaction.pk %}">
+                                        <i class="fas fa-trash-alt" id = "delete"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
+                                        <i class="fas fa-edit" id = "edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </a>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="square-not-found d-flex align-items-center d-flex justify-content-center shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex justify-content-center">
+                                    <i class="fas fa-search" style="font-size: 10vw;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex justify-content-center">
+                                    <p class="font-weight-bolder">Não foi possível encontrar nada correspondente a sua pesquisa</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex justify-content-center">
+                                    <a href="{% url 'core:list_transaction' %}" class="text-decoration-none">Listar todas as transações</a>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                   
+                </div>
+            {% endif %}
         </div>
     </div>
 
 </div>
 
-<br>
+
 <div class="d-flex justify-content-center">
     <nav aria-label="Page navigation example">
         <ul class="pagination rounded">
