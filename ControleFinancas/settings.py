@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -74,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ControleFinancas.wsgi.application'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Database
 
@@ -134,4 +136,3 @@ MEDIA_ROOT = "media"
 LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL = "core:list_transaction"
  
 
- 

@@ -1,10 +1,9 @@
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from core.models import *
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from core.forms import *
-from django.contrib.auth.mixins import LoginRequiredMixin
-from core.create_instance import create_transaction
 
 
 #! Transaction
@@ -22,13 +21,12 @@ class TrasactionListView(LoginRequiredMixin, ListView):
 
         if self.request.user.is_superuser is False:
             qs = qs.filter(client__user = self.request.user)
-        create_transaction(self.request.user)
+        
         if search is not None:
             qs = qs.filter(title__icontains = search)
         
         return qs 
 
-      
 class TransactionCreateView(LoginRequiredMixin, CreateView):
     model = Transaction
     form_class = TransactionForm
@@ -56,22 +54,17 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
-
 class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     model = Transaction
     form_class = TransactionForm
     template_name = "core/update_transaction.html"
     success_url = reverse_lazy('core:list_transaction')
 
-
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('core:list_transaction')
-    
 
 #! Category
-
-
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "core/modules/category/list_category.html"
@@ -80,10 +73,8 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs  = super(CategoryListView, self).get_queryset(*args, **kwargs)
-        
         if self.request.user.is_superuser is False:
             qs = qs.filter(client__user = self.request.user)
-
         return qs
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
