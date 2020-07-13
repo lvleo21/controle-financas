@@ -11,6 +11,14 @@ Lista de Transações
 {% endblock css %}
 
 {% block content %}
+
+{% if messages %}
+<div class="alert alert-success">
+    {% for m in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
+    {% endfor %}
+</div>
+{% endif %}
 <br>
 <div class="d-flex justify-content-center">
 

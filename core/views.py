@@ -9,12 +9,13 @@ from core.forms import *
 #! Transaction
 class TrasactionListView(LoginRequiredMixin, ListView):
     model = Transaction
-    template_name = "core/list_transaction.html"
+    template_name = "core/modules/transaction/list_transaction.html"
     context_object_name = "transactions"
     paginate_by = 9
 
     
 
+    
     def get_queryset(self, *args, **kwargs):
         qs = super(TrasactionListView, self).get_queryset(*args, **kwargs) 
         search = self.request.GET.get("id_search", None)
@@ -30,7 +31,7 @@ class TrasactionListView(LoginRequiredMixin, ListView):
 class TransactionCreateView(LoginRequiredMixin, CreateView):
     model = Transaction
     form_class = TransactionForm
-    template_name = "core/create_transaction.html"
+    template_name = "core/modules/transaction/create_transaction.html"
     success_url = reverse_lazy('core:list_transaction')
 
     def get_category_by_user(self, user):
@@ -57,7 +58,7 @@ class TransactionCreateView(LoginRequiredMixin, CreateView):
 class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     model = Transaction
     form_class = TransactionForm
-    template_name = "core/update_transaction.html"
+    template_name = "core/modules/transaction/update_transaction.html"
     success_url = reverse_lazy('core:list_transaction')
 
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):

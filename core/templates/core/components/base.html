@@ -16,13 +16,21 @@
     <script src="https://kit.fontawesome.com/d7f8f5e6ee.js" crossorigin="anonymous"></script>
 
 
-       
+
+
+
+
+    <!-- jquery.maskedinput-1.1.4.pack.js -->
+
+    <!--Arquivo de configuração das masks-->
+
+
 
     {% block css %}
     {% endblock css %}
 
     <style>
-        body{
+        body {
             background-color: whitesmoke;
         }
     </style>
@@ -31,9 +39,9 @@
 
 <body>
 
-    
 
-    <body class=" {% if request.path == '/accounts/login/' or request.path == '/accounts/create_client' %} bg-login {% else %} bg-site {% endif %}">
+    <body
+        class=" {% if request.path == '/accounts/login/' or request.path == '/accounts/create_client' %} bg-login {% else %} bg-site {% endif %}">
         {% block content %}
         {% endblock content %}
     </body>
@@ -41,6 +49,8 @@
 
     {% block extra_js %}
     {% endblock extra_js %}
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -51,6 +61,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://www.geradorcpf.com/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
+    <script src="{% static 'core/js/mask.js' %}"></script>
 </body>
 
 </html>

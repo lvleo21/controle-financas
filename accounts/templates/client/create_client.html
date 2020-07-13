@@ -1,16 +1,114 @@
 {% extends 'core/components/base.html' %}
 {% load widget_tweaks %}
+{% load static%}
 
 {% block title %}
 CADASTRO DO CLIENTE
 {% endblock title %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'accounts/css/create-client-style.css' %}">
+
+{% endblock css %}
+
+
 {% block content %}
 
 
+
+
 <div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
+
     <div class="row">
-        <div class="col-md-5">
+        <div class="col">
+            <div class="card shadow  mb-5 bg-white rounded">
+                <div class="card-header">
+                    <div class="d-flex justify-content-center">
+                        <h3>Crie sua conta !</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Nome</label>
+                                <i class="fas fa-info-circle icon-info" title="Digite seu nome completo"></i>
+                                {% render_field form.client.name class+="form-control" placeholder="Digite seu nome ..." %}
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Idade</label>
+                                {% render_field form.client.age class+="form-control" placeholder="Ex.: 21" %}
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form.user.username.label}}
+                                <i class="fas fa-info-circle icon-info" title="{{ form.user.username.help_text}}"></i>
+                                {% render_field form.user.username class+="form-control" placeholder="Digite seu nome de usuário ..." %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form.user.password1.label}}
+
+                                <div class="btn-group dropright">
+                                    <button class="button-info" type="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-info-circle icon-info" title="Pressione"></i>
+                                    </button>
+                                    <div class="dropdown-menu" style="width: 400px;">
+                                        {{ form.user.password1.help_text }}
+                                    </div>
+                                </div>
+
+                                {% render_field form.user.password1 class+="form-control" placeholder="Digite sua senha ..." %}
+
+                            </div>
+                            <div class="col">
+                                {{ form.user.password2.label}}
+
+                                <div class="btn-group dropright">
+                                    <button class="button-info" type="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-info-circle icon-info" title="Pressione"></i>
+                                    </button>
+                                    <div class="dropdown-menu" style="width: 400px;">
+                                        <ul>
+                                            <li>
+                                                {{ form.user.password2.help_text}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {% render_field form.user.password2 class+="form-control" placeholder="Digite novamente sua senha ..." %}
+
+                            </div>
+                        </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-outline-dark btn-block" href="{% url 'login' %}">Voltar</a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary btn-block" type="submit">CADASTRAR</button>
+                        </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if form.errors.items %}
+        <div class="col">
             <div class="alert alert-danger" role="alert">
                 <ul>
                     {% for field, errors in form.errors.items %}
@@ -19,77 +117,19 @@ CADASTRO DO CLIENTE
                     {% endfor %}
                     {% endfor %}
                 </ul>
+
             </div>
         </div>
+        {% endif %}
     </div>
-    <br>
-    <div class="card" style="width: 50vw;">
-        <div class="card-header">
-            <div class="d-flex justify-content-center">
-                <h3>FORMULÁRIO DE CADASTRO DO USUÁRIO</h3>
-            </div>
-        </div>
-        <div class="card-body">
-            <form action="" method="POST">
-                {% csrf_token %}
 
-                <div class="row">
-                    <div class="col">
-                        <label>Nome</label>
-                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                            title="Digite seu nome completo"></i><br>
-                        {% render_field form.client.name class+="form-control" placeholder="Digite seu nome ..." %}
-                    </div>
-
-                    <div class="col-md-3">
-                        <label>Idade</label>
-                        {% render_field form.client.age class+="form-control" placeholder="Ex.: 21" %}
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col">
-                        {{ form.user.username.label}}
-                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
-                            title="{{ form.user.username.help_text}}"></i><br>
-                        {% render_field form.user.username class+="form-control" placeholder="Digite seu nome de usuário ..." %}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        {{ form.user.password1.label}}
-                        {% render_field form.user.password1 class+="form-control" placeholder="Digite sua senha ..." %}
-                        {{ form.user.password1.help_text }}
-                    </div>
-                    <div class="col">
-                        {{ form.user.password2.label}}
-                        {% render_field form.user.password2 class+="form-control" placeholder="Digite novamente sua senha ..." %}
-                        {{ form.user.password2.help_text}}
-                    </div>
-                </div>
-        </div>
-
-        <div class="card-footer">
-            <div class="row">
-                <div class="col">
-                    <a class="btn btn-outline-dark btn-block" href="{% url 'login' %}">Voltar</a>
-                </div>
-                <div class="col">
-                    <button class="btn btn-primary btn-block" type="submit">CADASTRAR</button>
-                </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
 
 
 
 
 
 </div>
+
 
 
 {% endblock content %}
