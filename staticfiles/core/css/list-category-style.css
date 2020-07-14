@@ -1,0 +1,23 @@
+.square {
+    width: 100vw;
+    height: 100vh;
+}
+
+#edit:hover {
+    color: rgb(97, 128, 231);
+}
+
+#delete {
+    color: rgb(221, 90, 90);
+    background-color:transparent;
+    border:none;
+}
+
+#delete:focus{
+    border: none;
+outline:none;
+}
+
+#delete:hover {
+    color: red
+}
