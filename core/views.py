@@ -70,6 +70,19 @@ class TransactionUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "core/modules/transaction/update_transaction.html"
     success_url = reverse_lazy('core:list_transaction')
 
+    def get_category_by_user(self, user):
+        category = Category.objects.all()
+
+        if (user.is_superuser is False):
+            category = Category.objects.filter(client__user = user, is_active = True)
+        
+        return category
+
+    def get_context_data(self, **kwargs):
+        context = super(TransactionUpdateView, self).get_context_data(**kwargs)
+        context['form'].fields['category'].queryset = self.get_category_by_user(self.request.user)
+        return context
+
 class TransactionDeleteView(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('core:list_transaction')

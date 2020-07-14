@@ -19,25 +19,26 @@ Lista de Transações
 
     <div class="card shadow-sm  bg-white rounded">
         <div class="card-body">
-            
+
             <button type="button" class="btn btn-dark" disabled>
                 <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}}
             </button>
-    
+
             <a class="btn btn-info" style="color: white;" href="{% url 'core:create_transaction' %}"
                 title="Adicionar Transação">
                 <i class="fas fa-plus"></i>
             </a>
-    
-            <a class="btn btn-dark" style="color: white;" href="{% url 'core:list_category' %}" title="Lista de Categorias">
+
+            <a class="btn btn-dark" style="color: white;" href="{% url 'core:list_category' %}"
+                title="Lista de Categorias">
                 <i class="fas fa-list"></i>
             </a>
-    
+
             <a class="btn btn-danger" href="{% url 'logout' %}" title="Sair">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </div>
-        
+
     </div>
 
 
@@ -51,109 +52,122 @@ Lista de Transações
 <div class="container">
     <div class="card shadow-sm mb-5 bg-white rounded">
         <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <h3>
-                    <a class="text-dark" href="{% url 'core:list_transaction' %}" style="font-family: 'Cairo', sans-serif;">Lista de Transações</a>
-                </h3>
 
-                <form method="GET">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-8" style="padding: 0px;">
-
-
-
-                            <input class="form-control" type="text" placeholder="Buscar por título ..." name="id_search"
-                                type="search" style="border-radius: 0px;">
+            <div class="row">
+                <div class="col d-flex justify-content-start">
+                    <h3>
+                        <a class="text-dark" href="{% url 'core:list_transaction' %}"
+                            style="font-family: 'Cairo', sans-serif;">Lista de Transações</a>
+                    </h3>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <form method="GET">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col" style="padding: 0px;">
+                                <input class="form-control" type="text" placeholder="Buscar por título ..."
+                                    name="id_search" type="search" style="border-radius: 0px;">
+                            </div>
+    
+                            <div class="col" style="padding: 0px;">
+                                <button class="btn btn-success"
+                                    style="border-radius: 0px; border-bottom-right-radius: 0px;">
+                                    <i class="fas fa-search-dollar"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-3" style="padding: 0px;">
-                            <button class="btn btn-success"
-                                style="border-radius: 0px; border-bottom-right-radius: 0px;">
-                                <i class="fas fa-search-dollar"></i>
-                            </button>
-                        </div>
-                    </div>
 
-                </form>
-                <!-- <a href="{% url 'core:list_transaction' %}">Limpar</a> -->
+                    </form>
+                </div>
+
             </div>
+
+
+
+
+
         </div>
         <div class="card-body" style="padding: 0px;">
             {% if transactions.count > 0 %}
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th class="text-center" scope="col">Título</th>
-                        <th class="text-center" scope="col">Valor(R$)</th>
-                        <th class="text-center" scope="col">Categoria</th>
-                        <th class="text-center" scope="col">Adicionado</th>
-                        <th class="text-center" scope="col">Modificado</th>
-                        <th class="text-center" scope="col">Remover</th>
-                        <th class="text-center" scope="col">Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for transaction in transactions %}
-                    <a href="{% url 'core:update_transaction' transaction.pk %}">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Título</th>
+                            <th class="text-center" scope="col">Valor(R$)</th>
+                            <th class="text-center" scope="col">Categoria</th>
+                            <th class="text-center" scope="col">Adicionado</th>
+                            <th class="text-center" scope="col">Modificado</th>
+                            <th class="text-center" scope="col">Remover</th>
+                            <th class="text-center" scope="col">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <a href="{% url 'core:update_transaction' transaction.pk %}">
 
 
-                        <tr class="teste">
-                            <td class="text-center" id="title_label">
-                                <b>{{transaction.title}}</b>
+                            <tr class="teste">
+                                <td class="text-center" id="title_label">
+                                    <b>{{transaction.title}}</b>
 
-                            </td>
+                                </td>
 
-                            <td class="text-center"> {{transaction.value}}</td>
-                            <td class="text-center">{{transaction.category}}</td>
-                            <td class="text-center">{{transaction.date_trasaction}}</td>
-                            <td class="text-center">{{transaction.date_now}}</td>
-                            <td class="text-center">
+                                <td class="text-center"> {{transaction.value}}</td>
+                                <td class="text-center">{{transaction.category}}</td>
+                                <td class="text-center">{{transaction.date_trasaction}}</td>
+                                <td class="text-center">{{transaction.date_now}}</td>
+                                <td class="text-center">
 
-                                <button type="button" class="button-delete" data-toggle="modal"
-                                    data-target="#modal-{{transaction.pk}}">
-                                    <i class="fas fa-trash-alt" id="delete"></i>
-                                </button>
-
-
-                                <div class="modal fade" id="modal-{{transaction.pk}}" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <div class="modal-body">
-                                                <h5 class="text-dark" style="font-family: 'Cairo', sans-serif;">
-                                                    Deseja realmente excluir a transação
-                                                    <b style="color: rgb(101, 140, 223);">{{transaction.title|upper}}</b>?
-                                                </h5>
-                                            </div>
-                                            <form action="{% url 'core:delete_transaction' transaction.pk %}"
-                                                method="POST">
-                                                <div class="modal-footer">
-                                                    {% csrf_token %}
-
-                                                    <button type="submit"
-                                                        class="btn btn-danger btn-block">CONFIRMAR</button>
+                                    <button type="button" class="button-delete" data-toggle="modal"
+                                        data-target="#modal-{{transaction.pk}}">
+                                        <i class="fas fa-trash-alt" id="delete"></i>
+                                    </button>
 
 
-                                                    <button type="button" class="btn btn-outline-secondary btn-block"
-                                                        data-dismiss="modal">VOLTAR</button>
+                                    <div class="modal fade" id="modal-{{transaction.pk}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <div class="modal-body">
+                                                    <h5 class="text-dark" style="font-family: 'Cairo', sans-serif;">
+                                                        Deseja realmente excluir a transação
+                                                        <b
+                                                            style="color: rgb(101, 140, 223);">{{transaction.title|upper}}</b>?
+                                                    </h5>
                                                 </div>
-                                            </form>
+                                                <form action="{% url 'core:delete_transaction' transaction.pk %}"
+                                                    method="POST">
+                                                    <div class="modal-footer">
+                                                        {% csrf_token %}
+
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-block">CONFIRMAR</button>
+
+
+                                                        <button type="button"
+                                                            class="btn btn-outline-secondary btn-block"
+                                                            data-dismiss="modal">VOLTAR</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
+                                </td>
+                                <td class="text-center">
 
-                                <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
-                                    <i class="fas fa-edit" id="edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </a>
-                    {% endfor %}
-                </tbody>
-            </table>
+                                    <a class="text-dark" href="{% url 'core:update_transaction' transaction.pk %}">
+                                        <i class="fas fa-edit" id="edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </a>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
             {% elif search_not_exist %}
             <div
                 class="square-not-found d-flex align-items-center d-flex justify-content-center shadow-sm p-3 mb-5 bg-white rounded">
@@ -171,7 +185,8 @@ Lista de Transações
                     <div class="row">
                         <div class="col">
                             <div class="d-flex justify-content-center">
-                                <p class="h2" style="font-family: 'Cairo', sans-serif;">Não foi possível encontrar nada correspondente a sua
+                                <p class="h2" style="font-family: 'Cairo', sans-serif;">Não foi possível encontrar nada
+                                    correspondente a sua
                                     pesquisa</p>
 
 
@@ -183,7 +198,7 @@ Lista de Transações
                         <div class="col">
                             <div class="d-flex justify-content-center">
                                 <a href="{% url 'core:list_transaction' %}" class="text-decoration-none"
-                                style="font-family: 'Assistant', sans-serif;">Listar todas as
+                                    style="font-family: 'Assistant', sans-serif;">Listar todas as
                                     transações</a>
 
                             </div>
@@ -208,8 +223,9 @@ Lista de Transações
                     <div class="row">
                         <div class="col">
                             <div class="d-flex justify-content-center">
-                                <p class="h2" style="font-family: 'Cairo', sans-serif;">Sua lista de transações está vazia!</p>
-                                
+                                <p class="h2" style="font-family: 'Cairo', sans-serif;">Sua lista de transações está
+                                    vazia!</p>
+
 
                             </div>
                         </div>
@@ -218,9 +234,9 @@ Lista de Transações
                     <div class="row">
                         <div class="col">
                             <div class="d-flex justify-content-center">
-                            
-                                <a href="{% url 'core:create_transaction' %}" class="text-decoration-none" 
-                                style="font-family: 'Assistant', sans-serif;">Adicionar
+
+                                <a href="{% url 'core:create_transaction' %}" class="text-decoration-none"
+                                    style="font-family: 'Assistant', sans-serif;">Adicionar
                                     nova transação</a>
                             </div>
                         </div>
