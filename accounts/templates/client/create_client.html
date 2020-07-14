@@ -3,7 +3,7 @@
 {% load static%}
 
 {% block title %}
-CADASTRO DO CLIENTE
+Crie sua conta !
 {% endblock title %}
 
 {% block css %}
@@ -35,27 +35,44 @@ CADASTRO DO CLIENTE
                             <div class="col">
                                 <label>Nome</label>
                                 <i class="fas fa-info-circle icon-info" title="Digite seu nome completo"></i>
-                                {% render_field form.client.name class+="form-control" placeholder="Digite seu nome ..." %}
+                                {% render_field client.name class+="form-control" placeholder="Digite seu nome ..." %}
+
+                                <small class="font-weight-bold" style="color: red;">
+                                    {% for error in client.name.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </small>
+
                             </div>
 
                             <div class="col-md-3">
                                 <label>Idade</label>
-                                {% render_field form.client.age class+="form-control" placeholder="Ex.: 21" %}
+                                {% render_field client.age class+="form-control" placeholder="Ex.: 21" %}
+                                <small class="font-weight-bold" style="color: red;">
+                                    {% for error in client.age.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </small>
                             </div>
                         </div>
 
 
                         <div class="row">
                             <div class="col">
-                                {{ form.user.username.label}}
+                                {{ user.username.label}}
                                 <i class="fas fa-info-circle icon-info" title="{{ form.user.username.help_text}}"></i>
-                                {% render_field form.user.username class+="form-control" placeholder="Digite seu nome de usuário ..." %}
+                                {% render_field user.username class+="form-control" placeholder="Digite seu nome de usuário ..." %}
+                                <small class="font-weight-bold" style="color: red;">
+                                    {% for error in user.username.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </small>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                {{ form.user.password1.label}}
+                                {{ user.password1.label}}
 
                                 <div class="btn-group dropright">
                                     <button class="button-info" type="button" data-toggle="dropdown"
@@ -63,15 +80,21 @@ CADASTRO DO CLIENTE
                                         <i class="fas fa-info-circle icon-info" title="Pressione"></i>
                                     </button>
                                     <div class="dropdown-menu" style="width: 400px;">
-                                        {{ form.user.password1.help_text }}
+                                        {{ user.password1.help_text }}
                                     </div>
                                 </div>
 
-                                {% render_field form.user.password1 class+="form-control" placeholder="Digite sua senha ..." %}
+                                {% render_field user.password1 class+="form-control" placeholder="Digite sua senha ..." %}
+
+                                <small class="font-weight-bold" style="color: red;">
+                                    {% for error in user.password1.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </small>
 
                             </div>
                             <div class="col">
-                                {{ form.user.password2.label}}
+                                {{ user.password2.label}}
 
                                 <div class="btn-group dropright">
                                     <button class="button-info" type="button" data-toggle="dropdown"
@@ -81,13 +104,19 @@ CADASTRO DO CLIENTE
                                     <div class="dropdown-menu" style="width: 400px;">
                                         <ul>
                                             <li>
-                                                {{ form.user.password2.help_text}}
+                                                {{ user.password2.help_text}}
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
 
-                                {% render_field form.user.password2 class+="form-control" placeholder="Digite novamente sua senha ..." %}
+                                {% render_field user.password2 class+="form-control" placeholder="Digite novamente sua senha ..." %}
+
+                                <small class="font-weight-bold" style="color: red;">
+                                    {% for error in user.password2.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </small>
 
                             </div>
                         </div>
@@ -96,10 +125,10 @@ CADASTRO DO CLIENTE
                 <div class="card-footer">
                     <div class="row">
                         <div class="col">
-                            <a class="btn btn-outline-dark btn-block" href="{% url 'login' %}">VOLTAR</a>
+                            <a class="btn btn-outline-dark btn-block" style = "border-radius: 0px;" href="{% url 'login' %}">VOLTAR</a>
                         </div>
                         <div class="col">
-                            <button class="btn btn-success btn-block" type="submit">CADASTRAR</button>
+                            <button class="btn btn-success btn-block" style = "border-radius: 0px;" type="submit">CADASTRAR</button>
                         </div>
 
                         </form>
@@ -107,29 +136,8 @@ CADASTRO DO CLIENTE
                 </div>
             </div>
         </div>
-        {% if form.errors.items %}
-        <div class="col">
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    {% for field, errors in form.errors.items %}
-                    {% for error in errors %}
-                    <li>{{error}}</li>
-                    {% endfor %}
-                    {% endfor %}
-                </ul>
-
-            </div>
-        </div>
-        {% endif %}
+        
     </div>
-
-
-
-
-
-
 </div>
-
-
 
 {% endblock content %}

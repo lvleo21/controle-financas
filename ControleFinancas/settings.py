@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = False, cast = bool)
 
-ALLOWED_HOSTS = ['controle-financas.herokuapp.com', 'localhost:8000']
+ALLOWED_HOSTS = ['controle-financas.herokuapp.com', '*']
 #https://controle-financas.herokuapp.com/ | https://git.heroku.com/controle-financas.git
 
 
@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    'six',
-    'betterforms',
     'core',
     'accounts',
 ]

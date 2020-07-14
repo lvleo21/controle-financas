@@ -11,5 +11,6 @@ urlpatterns = [
     path("create-category/", CategoryCreateView.as_view() , name="create_category"),
     path("list-category/", CategoryListView.as_view() , name="list_category"),
     path("delete-category/<int:pk>/", CategoryDeleteView.as_view() , name="delete_category"),
+    
 
 ]   

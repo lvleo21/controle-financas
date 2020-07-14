@@ -14,16 +14,26 @@ Control Transaction
 
 {% block content %}
 
+
+{% if form.errors %}
+
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position: fixed; margin-top: 2vh;">
+            {% for error in form.non_field_errors %}
+                <b>{{ error|escape }}</b>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endif %}
+
+
 <div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
 
 
 
     <div class="shadow p-3 mb-5 bg-white rounded">
-        {% if form.non_field_errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <b>USUÁRIO</b> ou <b>SENHA</b> inválido, tente novamente.
-        </div>
-        {% endif %}
+
 
         <div class="" style="background-color: white; padding: 20px; border-radius: 20px;">
             <div class="d-flex justify-content-center">
@@ -36,11 +46,19 @@ Control Transaction
                     {{form.username.label}}
                 </b>
                 {% render_field form.username class+="form-control" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
+
+
+
                 <b>
-                    {{form.password.label}} 
+                    {{form.password.label}}
                 </b>
                 {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
+
+
+
+
                 <br>
+
                 <button class="btn btn-success btn-block" style="border-radius: 0px;" type="submit">ENTRAR</button>
 
 
@@ -55,16 +73,6 @@ Control Transaction
 
     </div>
 
-
-
-
-
-
-
-
 </div>
-
-
-
 
 {% endblock content %}

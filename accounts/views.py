@@ -1,21 +1,29 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from core.forms import UserClientForm
+
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import *
 from core.models import Client
+from accounts.forms import UserForm, ClientForm
 
-class ClientCreateView(SuccessMessageMixin, CreateView):
-    model = Client
-    form_class = UserClientForm
+
+def ClientCreateView(request):
     template_name = "client/create_client.html"
-    success_url = reverse_lazy('login')
-    success_message = "Client was created successfully"
 
-    def form_valid(self, form):
-        user = form['user'].save()
+    user_form = UserForm(request.POST or None)
+    client_form = ClientForm(request.POST or None)
 
-        client = form['client'].save(commit=False)
+    context = {
+        'user': user_form,
+        'client': client_form,
+    }
+
+    if user_form.is_valid() and client_form.is_valid():
+        user = user_form.save()
+        client = client_form.save(commit=False)
         client.user = user
         client.save()
-        return super().form_valid(form)
+
+        return redirect("login")
+
+    return render(request, template_name, context)

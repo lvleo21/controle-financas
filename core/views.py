@@ -104,7 +104,10 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         self.object.client = temp_client
         self.object.save()
         return super().form_valid(form)
-    
+
+
+
+
 
     
     
