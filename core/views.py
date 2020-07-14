@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from core.models import *
 from core.forms import *
-from core.create_instance import create_transaction
+
 
 
 #! Transaction
@@ -25,7 +25,7 @@ class TrasactionListView(LoginRequiredMixin, ListView):
         qs = super(TrasactionListView, self).get_queryset(*args, **kwargs) 
         search = self.request.GET.get("id_search", None)
         
-        #create_transaction(self.request.user)
+        
 
         if self.request.user.is_superuser is False:
             qs = qs.filter(client__user = self.request.user)
