@@ -1,23 +1,112 @@
 {% extends 'core/components/base.html' %}
-
+{% load static %}
+{% load widget_tweaks %}
 
 {% block title %}
-Atualizar de Transação
+Editar Transação
 {% endblock title %}
 
 {% block content %}
 
-<h1>ATUALIZAR TRANSAÇÃO</h1>
 
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Concluir</button>
-</form>
+<div class="vw-100 vh-100 d-flex align-items-center d-flex justify-content-center">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="card shadow  mb-3 bg-white rounded">
+            <div class="card-header">
+                <div class="d-flex justify-content-center">
+                    <h3 class="text-dark" style="font-family: 'Cairo', sans-serif;">Editar Transação</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <b>{{form.title.label}}</b>
+                        {% render_field form.title class+="form-control" %}
 
-<br>
+                        <small class="font-weight-bold" style="color: red;">
+                            {% for error in form.title.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                    </div>
 
-<a href="{% url 'core:list_transaction' %}">Voltar</a>
+                    <div class="col-md-4">
+                        <b>{{form.date_trasaction.label}}</b>
+                        {% render_field form.date_trasaction class+="form-control"  %}
+
+                        <small class="font-weight-bold" style="color: red;">
+                            {% for error in form.date_trasaction.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <b>{{form.category.label}}</b>
+                        {% render_field form.category class+="form-control" %}
+                        <small class="font-weight-bold" style="color: red;">
+                            {% for error in form.category.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                    </div>
+                    <div class="col">
+                        <b>{{form.value.label}}</b>
+                        {% render_field form.value class+="form-control" %}
+                        <small class="font-weight-bold" style="color: red;">
+                            {% for error in form.value.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </small>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col">
+                        <b>{{form.description.label}}:</b>
+                        {% render_field form.description class+="form-control" rows="3" %}
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'core:list_transaction' %}"
+                            class="btn btn-outline-secondary  btn-block">VOLTAR</a>
+
+                    </div>
+                    <div class="col">
+
+                        <button class="btn btn-success btn-block" type="submit">CONCLUIR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+
 
 {% endblock content %}

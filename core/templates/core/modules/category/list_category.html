@@ -8,24 +8,7 @@ Categorias
 
 {% block css %}
 
-<style>
-    .square {
-        width: 100vw;
-        height: 100vh;
-    }
-
-    #edit:hover {
-        color: rgb(97, 128, 231);
-    }
-
-    #delete {
-        color: rgb(221, 90, 90)
-    }
-
-    #delete:hover {
-        color: red
-    }
-</style>
+<link rel="stylesheet" href="{% static 'core/css/list-category-style.css' %}">
 
 {% endblock css %}
 
@@ -34,18 +17,21 @@ Categorias
 
 <div class="square d-flex align-items-center d-flex justify-content-center">
     <div>
-        <div class="card">
+        <div class="card shadow bg-white rounded">
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h2 style="margin: 0px;">Categorias</h2>
+                        <h2 class="text-dark" style="font-family: 'Cairo', sans-serif;">Categorias</h2>
                         <small><a class="text-decoration-none" href="{% url 'core:list_transaction' %}">Lista de
                                 Transações</a></small>
                     </div>
 
                     <div class="col-md-2">
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary btn-lg" title="Adicionar Categoria">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#exampleModal">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -85,8 +71,8 @@ Categorias
 
                             <td class="text-center">
 
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#modal-{{category.pk}}">
+                                <button type="button" id="delete" data-toggle="modal"
+                                    style="background-color: transparent;" data-target="#modal-{{category.pk}}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
 
@@ -171,6 +157,36 @@ Categorias
 
 
 
+
+
+<!-- Modal -->
+<form action="{% url 'core:create_category' %}" method="POST">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel" style="font-family: 'Cairo', sans-serif;">Adicionar Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    {% csrf_token %}
+                    <label for="id_name"><b>Nome:</b></label>
+                    <input class="form-control" type="text" name="name" maxlength="50" required="" id="id_name">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block">ADICIONAR</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block"
+                        data-dismiss="modal">VOLTAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 {% endblock content %}

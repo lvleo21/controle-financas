@@ -18,8 +18,6 @@ class UserForm(UserCreationForm):
         fields = ["username", ]
 
 class ClientForm(ModelForm):
-
-    
     class Meta:
         model = Client
         fields = "__all__"
@@ -32,5 +30,11 @@ class UserClientForm(MultiModelForm):
         'client': ClientForm,
     }
 
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = "__all__"
+        exclude = ["client", "is_active", ]
 
         

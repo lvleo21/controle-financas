@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block title %}
-Criar de Transação
+Registrar Transação
 {% endblock title %}
 
 
@@ -19,7 +19,7 @@ Criar de Transação
         <div class="card shadow  mb-3 bg-white rounded">
             <div class="card-header">
                 <div class="d-flex justify-content-center">
-                    <h3>Adicionar Transação</h3>
+                    <h3 class="text-dark" style="font-family: 'Cairo', sans-serif;">Adicionar Transação</h3>
                 </div>
             </div>
 
@@ -48,7 +48,8 @@ Criar de Transação
                 <div class="row">
                     <div class="col">
                         <b>{{form.category.label}}:</b>
-                        {% render_field form.category class+="form-control" %}<i class="fas fa-plus"></i>
+                        {% render_field form.category class+="form-control" %}
+                        
                     </div>
 
                   
@@ -74,7 +75,7 @@ Criar de Transação
                         </div>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary btn-block" type="submit">ADICIONAR</button>
+                        <button class="btn btn-success btn-block" type="submit">ADICIONAR</button>
                     </div>
                 </div>
             </div>

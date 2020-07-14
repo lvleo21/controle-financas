@@ -14,7 +14,7 @@ class Client(models.Model):
 class Category(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=50, verbose_name="Nome")
-    is_active = models.BooleanField(verbose_name="Ativo?", default = False)
+    is_active = models.BooleanField(verbose_name="Ativo?", default = True, null=True, blank=True)
 
     def __str__(self):
         return self.name.upper()
@@ -27,6 +27,7 @@ class Transaction(models.Model):
     date_now = models.DateTimeField(auto_now=True)
     date_trasaction = models.DateField(verbose_name="Data da Transação")
     description = models.TextField(verbose_name="Descrição", blank=True)
+    
 
     def __str__(self):
         return self.title.upper()
@@ -35,8 +36,6 @@ class Transaction(models.Model):
         ordering = ["-date_now"]
 
 
-
-    
 
 
 

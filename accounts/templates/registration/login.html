@@ -27,24 +27,26 @@ Control Transaction
 
         <div class="" style="background-color: white; padding: 20px; border-radius: 20px;">
             <div class="d-flex justify-content-center">
-                <h6>OLÁ, SEJA BEM-VINDO !</h6>
+                <h4 class="text-dark" style="font-family: 'Cairo', sans-serif;">OLÁ, SEJA BEM-VINDO !</h4>
             </div>
             <hr>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{form.username.label}}
-                {% render_field form.username class+="form-control input-focus" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
-
-                {{form.password.label}}
-                {% render_field form.password class+="form-control input-focus" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
+                <b>
+                    {{form.username.label}}
+                </b>
+                {% render_field form.username class+="form-control" placeholder="Digite seu login ..." style="margin-top:6px; margin-bottom: 5px;" %}
+                <b>
+                    {{form.password.label}} 
+                </b>
+                {% render_field form.password class+="form-control" placeholder="Digite sua senha ..." style="margin-top:6px;"%}
                 <br>
-                <button class="btn btn-primary btn-block" 
-                    type="submit">LOGIN</button>
+                <button class="btn btn-success btn-block" style="border-radius: 0px;" type="submit">ENTRAR</button>
 
-                 
 
-                <a class="btn btn-outline-secondary btn-block" href="{% url 'accounts:create_client' %}" 
-                style="border-radius: 0px;">SIGN UP</a>
+
+                <a class="btn btn-outline-secondary btn-block" href="{% url 'accounts:create_client' %}"
+                    style="border-radius: 0px;">CADASTRE-SE</a>
             </form>
         </div>
     </div>

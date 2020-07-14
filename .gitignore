@@ -6,3 +6,4 @@ migrate.sh
 mm.sh
 run.sh
 venv.sh
+create_instance.py
