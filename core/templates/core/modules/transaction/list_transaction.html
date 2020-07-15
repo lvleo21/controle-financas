@@ -20,21 +20,21 @@ Lista de Transações
     <div class="card shadow-sm  bg-white rounded">
         <div class="card-body">
 
-            <button type="button" class="btn btn-dark" disabled>
+            <button type="button" class="btn btn-dark" disabled style="border-radius: 0px;">
                 <span class="badge badge-light"><i class="fas fa-user"></i></span> {{request.user.username|upper}}
             </button>
 
-            <a class="btn btn-info" style="color: white;" href="{% url 'core:create_transaction' %}"
+            <a class="btn btn-info" style="color: white; border-radius: 0px;" href="{% url 'core:create_transaction' %}"
                 title="Adicionar Transação">
                 <i class="fas fa-plus"></i>
             </a>
 
-            <a class="btn btn-dark" style="color: white;" href="{% url 'core:list_category' %}"
+            <a class="btn btn-dark" style="color: white; border-radius: 0px;" href="{% url 'core:list_category' %}"
                 title="Lista de Categorias">
                 <i class="fas fa-list"></i>
             </a>
 
-            <a class="btn btn-danger" href="{% url 'logout' %}" title="Sair">
+            <a class="btn btn-danger" href="{% url 'logout' %}" title="Sair" style="border-radius: 0px;">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </div>

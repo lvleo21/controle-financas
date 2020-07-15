@@ -4,7 +4,6 @@ $(document).ready(function(){
     $("#sus").mask("999 9999 9999 9999");
     $("#cnpj").mask("99.999.999/9999-99");
     $("#date").mask("99/99/99");
-    $("#id_date_trasaction").mask("99/99/9999");
     $("#time").mask("99:99:99");
     $("#date_time").mask("99/99/99 99:99:99");
     $("#landline").mask("(99) 9999-9999");

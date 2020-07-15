@@ -21,3 +21,8 @@ outline:none;
 #delete:hover {
     color: red
 }
+
+.button-back{
+    position: fixed; 
+    padding: 1vw;
+}

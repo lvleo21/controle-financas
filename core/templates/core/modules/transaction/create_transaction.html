@@ -7,6 +7,26 @@ Registrar Transação
 {% endblock title %}
 
 
+{% block css %}
+<style>
+    .add-category {
+        background-color: transparent;
+        color: blue;
+        border: none;
+        outline: none;
+    }
+
+    .add-category:focus{
+        border: none;
+        outline: none;
+    }
+    .add-category:hover{
+        text-decoration: underline;
+    }
+
+</style>
+{% endblock css %}
+
 
 
 {% block content %}
@@ -40,19 +60,24 @@ Registrar Transação
 
                     <div class="col">
                         <b>{{form.date_trasaction.label}}:</b>
-                        {% render_field form.date_trasaction class+="form-control"  %}
+                        {% render_field form.date_trasaction class+="form-control"  type='date' %}
                     </div>
-                    
+
                 </div>
 
                 <div class="row">
                     <div class="col">
                         <b>{{form.category.label}}:</b>
                         {% render_field form.category class+="form-control" %}
-                        
+                        <small>
+                            <button  type = "button" class = "add-category" data-toggle="modal" data-target="#adicionar_categoria">
+                                Adicionar categoria
+                            </button>
+                        </small>
+
                     </div>
 
-                  
+
                 </div>
 
                 <div class="row">
@@ -60,7 +85,7 @@ Registrar Transação
                         <b>{{form.description.label}}:</b>
                         {% render_field form.description class+="form-control" rows="3"  %}
                     </div>
-                   
+
                 </div>
 
 
@@ -83,6 +108,41 @@ Registrar Transação
     </div>
 
 </form>
+
+
+
+<form action="{% url 'core:create_category' %}" method="POST">
+    <div class="modal fade" id="adicionar_categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel" style="font-family: 'Cairo', sans-serif;">
+                        Adicionar Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    {% csrf_token %}
+                    <label for="id_name"><b>Nome:</b></label>
+                    <input class="form-control" type="text" name="name" maxlength="50" required="" id="id_name">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-block">ADICIONAR</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block"
+                        data-dismiss="modal">VOLTAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
 
 
 {% endblock content %}

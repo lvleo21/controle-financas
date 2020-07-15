@@ -21,3 +21,15 @@ outline:none;
 #delete:hover {
     color: red
 }
+
+.back_button{
+    position: fixed; 
+    color: white;
+    padding: 1vw;
+    transition: transform .5s , color .9s;
+}
+
+.back_button:hover{
+    color: black;
+    transform: scale(1.5);
+}

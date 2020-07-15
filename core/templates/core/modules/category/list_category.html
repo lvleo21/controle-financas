@@ -15,6 +15,12 @@ Categorias
 
 {% block content %}
 
+<div class="back_button">
+    <a href="{% url 'core:list_transaction' %}" title="Voltar">
+        <i class="fas fa-chevron-left" style="color: black;"></i>
+    </a>
+</div>
+
 <div class="square d-flex align-items-center d-flex justify-content-center">
     <div>
         <div class="card shadow bg-white rounded">
@@ -22,8 +28,6 @@ Categorias
                 <div class="row">
                     <div class="col">
                         <h2 class="text-dark" style="font-family: 'Cairo', sans-serif;">Categorias</h2>
-                        <small><a class="text-decoration-none" href="{% url 'core:list_transaction' %}">Lista de
-                                Transações</a></small>
                     </div>
 
                     <div class="col-md-2">

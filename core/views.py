@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from core.models import *
 from core.forms import *
 
+from django.http import HttpResponseRedirect
 
 
 #! Transaction
@@ -92,7 +93,7 @@ class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "core/modules/category/list_category.html"
     context_object_name = "categories"
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self, *args, **kwargs):
         qs  = super(CategoryListView, self).get_queryset(*args, **kwargs)
@@ -102,14 +103,15 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
-    success_url = reverse_lazy("core:list_category")
+    
+    def get_success_url(self):
+        return self.request.META.get("HTTP_REFERER")
 
 
 class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     template_name = "core/modules/category/create_category.html"
-    success_url = reverse_lazy('core:list_category')
 
     def form_valid(self, form):
         self.object = form.save()
@@ -118,6 +120,9 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
+
+    def get_success_url(self):
+        return self.request.META.get("HTTP_REFERER")
 
 
 

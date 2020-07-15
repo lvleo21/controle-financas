@@ -32,9 +32,9 @@ Editar Transação
                         </small>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <b>{{form.date_trasaction.label}}</b>
-                        {% render_field form.date_trasaction class+="form-control"  %}
+                        {% render_field form.date_trasaction class+="form-control" type="date" %}
 
                         <small class="font-weight-bold" style="color: red;">
                             {% for error in form.date_trasaction.errors %}
