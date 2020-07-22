@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -6,6 +6,7 @@ from core.models import *
 from core.forms import *
 
 from django.http import HttpResponseRedirect
+from django.http.response import JsonResponse
 
 
 #! Transaction
@@ -108,27 +109,91 @@ class CategoryDeleteView(LoginRequiredMixin, DeleteView):
         return self.request.META.get("HTTP_REFERER")
 
 
-class CategoryCreateView(LoginRequiredMixin, CreateView):
+
+
+class CategoryCreateView(LoginRequiredMixin, View):
     model = Category
     form_class = CategoryForm
-    template_name = "core/modules/category/create_category.html"
 
     def form_valid(self, form):
-        self.object = form.save()
-        temp_client = Client.objects.get(user = self.request.user)
-        self.object.client = temp_client
-        self.object.save()
-        return super().form_valid(form)
+        if form.is_valid():
+            self.object = form.save()
+            temp_client = Client.objects.get(user = self.request.user)
+            self.object.client = temp_client
+            self.object.save()
+            
+            data = {
+                "status": 200,
+                "id": self.object.pk,
+                "name": self.object.name.upper(),
+            }
+
+        else:
+
+            data = {
+                "status": 500,
+                "id": None,
+                "name": None,
+            }
+        return data
+        
+
+        
+        
+
+    def post(self, request, *args, **kwargs):
+        form = CategoryForm(request.POST)
+        data = self.form_valid(form)
+        return JsonResponse(data)
 
 
-    def get_success_url(self):
-        return self.request.META.get("HTTP_REFERER")
+def create_category_modal(request):
+    data = {}
+    name = request.GET.get("name", None)
+
+    if name is None:
+        data['is_none'] = True 
+    else:
+        try:
+            temp_category = Category.objects.get(name = name)
+            data['is_exist'] = True
+
+        except Category.DoesNotExist:
+            temp_client = Client.objects.get(user = request.user)
+            new_category = Category(name=name, client=temp_client)
+            new_category.save()
+
+
+            print("PK",new_category.pk)
+            data['success'] = True
+            data['obj'] = {
+                'name': new_category.name.upper(),
+                'id': new_category.pk
+            }
+
+
+    return JsonResponse(data)
 
 
 
 
     
-    
+#! Page 404
+def page_404_view(request, exception):    
+    template_name = "core/pages/404.html"
 
+    path = request.path
+    
+    if path.startswith("/update/"):
+        error = "update"
+    else:
+        error = None
+    
+    
+    data = {
+        'error': error
+    }
+    
+    return render(request, template_name, data)
 
  

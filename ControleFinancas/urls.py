@@ -23,3 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
 ]
+
+
+handler404 = 'core.views.page_404_view'

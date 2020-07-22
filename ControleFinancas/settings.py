@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['controle-financas.herokuapp.com', '*']
 
 # Application definition
 
+HUMANIZE = 'django.contrib.humanize'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    HUMANIZE,
     'widget_tweaks',
     'core',
     'accounts',
@@ -144,3 +147,4 @@ MEDIA_ROOT = "media"
 LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL = "core:list_transaction"
  
 
+CSRF_COOKIE_NAME = "XSRF-TOKEN"

@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block title %}
-Registrar Transação
+Transação
 {% endblock title %}
 
 
@@ -16,14 +16,16 @@ Registrar Transação
         outline: none;
     }
 
-    .add-category:focus{
+    .add-category:focus {
         border: none;
         outline: none;
     }
-    .add-category:hover{
+
+    .add-category:hover {
         text-decoration: underline;
     }
 
+    
 </style>
 {% endblock css %}
 
@@ -33,9 +35,25 @@ Registrar Transação
 
 
 
+<div class="alert alert-success alert-dismissible fade show" role="alert" id="div-alert">
+    <p id="message_success"></p>
+    
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+
+
+
+
+
+
 <form action="" method="POST">
     {% csrf_token %}
     <div class="d-flex align-items-center d-flex justify-content-center" style="width: 100vw; height: 100vh;">
+
+
         <div class="card shadow  mb-3 bg-white rounded">
             <div class="card-header">
                 <div class="d-flex justify-content-center">
@@ -70,7 +88,8 @@ Registrar Transação
                         <b>{{form.category.label}}:</b>
                         {% render_field form.category class+="form-control" %}
                         <small>
-                            <button  type = "button" class = "add-category" data-toggle="modal" data-target="#adicionar_categoria">
+                            <button type="button" class="add-category" data-toggle="modal"
+                                data-target="#adicionar_categoria">
                                 Adicionar categoria
                             </button>
                         </small>
@@ -110,39 +129,47 @@ Registrar Transação
 </form>
 
 
+<form action="" id="formCreateCategory" method="POST">
 
-<form action="{% url 'core:create_category' %}" method="POST">
+    {% csrf_token %}
+
     <div class="modal fade" id="adicionar_categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark" id="exampleModalLabel" style="font-family: 'Cairo', sans-serif;">
-                        Adicionar Categoria</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header d-flex justify-content-center">
+                    <h4 class="modal-title text-dark" id="exampleModalLabel" style="font-family: 'Cairo', sans-serif;">
+                        Adicionar Categoria</h4>
                 </div>
                 <div class="modal-body">
 
-
-                    {% csrf_token %}
                     <label for="id_name"><b>Nome:</b></label>
-                    <input class="form-control" type="text" name="name" maxlength="50" required="" id="id_name">
+                    <input class="form-control" type="text" name="name" maxlength="50" required="" id="id_name"
+                        placeholder="Ex.: Roupas, Sapatos, Medicamento ...">
+
+                    <small class="" id="error_category" style="margin-top: 5px;display:none;color: #ED2939;">
+
+                    </small>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-block">ADICIONAR</button>
-                    <button type="button" class="btn btn-outline-secondary btn-block"
+                    <button class="btn btn-success btn-block" type="button" id="buttonCreateCategory">ADICIONAR</button>
+
+                    <button type="button" id="buttonCloseModal" class="btn btn-outline-secondary btn-block"
                         data-dismiss="modal">VOLTAR</button>
                 </div>
             </div>
         </div>
     </div>
+
 </form>
 
-
-
-
-
-
 {% endblock content %}
+
+
+
+{% block extra_js %}
+
+<script src="{% static 'core/js/createCategory.js' %}"></script>
+
+
+{% endblock extra_js %}

@@ -1,0 +1,23 @@
+{% extends 'core/components/base.html' %}
+
+{% block title %}
+Página não encontrada - Control Trasaction
+{% endblock title %}
+
+{% block content %}
+
+<a href="{% url 'core:list_transaction' %}">Voltar</a>
+
+{% if error == 'update' %}
+<h1>
+    Transação não encontrada ou removida !
+</h1>
+{% else %}
+<h1>
+    Página não encontrada!
+</h1>
+{% endif %}
+
+
+{% endblock content%}
+

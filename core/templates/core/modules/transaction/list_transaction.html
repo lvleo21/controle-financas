@@ -1,6 +1,7 @@
 {% extends 'core/components/base.html' %}
 {% load widget_tweaks %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}
 Lista de Transações
@@ -114,9 +115,15 @@ Lista de Transações
                                 </td>
 
                                 <td class="text-center"> {{transaction.value}}</td>
-                                <td class="text-center">{{transaction.category}}</td>
+                                <td class="text-center">
+                                    {% if transaction.category is not None %}
+                                        {{transaction.category}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
                                 <td class="text-center">{{transaction.date_trasaction}}</td>
-                                <td class="text-center">{{transaction.date_now}}</td>
+                                <td class="text-center">{{transaction.date_now|naturaltime }}</td>
                                 <td class="text-center">
 
                                     <button type="button" class="button-delete" data-toggle="modal"
